@@ -15,7 +15,7 @@ var todos={
     7:{title:"Peach",status:statusENUMS.ACTIVE},
     8:{title:"Cherry",status:statusENUMS.ACTIVE}
 };
-var next_fruit_id=6;
+var next_fruit_id=9;
 module.exports={
     statusENUMS:statusENUMS,
     todos:todos,

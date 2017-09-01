@@ -5,7 +5,7 @@ var bodyParser=require("body-parser");//middle wares
 
 var fruitsDB=require("./database.js");
 
-app.use("/",express.static(__dirname+"public"));
+app.use("/",express.static(__dirname+"/public"));
 app.use("/",bodyParser.urlencoded({extended:false}));
 
 //to get all the fruits that are active ie we still have to buy
@@ -31,6 +31,8 @@ app.post("/api/todos",function (req,res) {
         res.status(400).json({error:"Fruit name cant be empty"});
     }
     else{
+        var titletest=false;
+        //for(var i=0;i<fruitsDB.length;)
         var newFruit={
             title : req.body.fruitName,
             status : fruitsDB.statusENUMS.ACTIVE
@@ -42,9 +44,11 @@ app.post("/api/todos",function (req,res) {
 });
 //put is used to make the changes in the status of fruits list i.e. from active to either complete or delete
 app.put("/api/todos/:id",function (req,res) {
+    console.log("inside put");
     var modFruitId=req.params.id;
-    var fruitName1=fruitsDB.todos[modFruitId];
-    if(!fruitName1) {
+    var fruitObject=fruitsDB.todos[modFruitId];
+    console.log("test 1:"+fruitObject);
+    if(!fruitObject) {
         res.status(400).json({error: "Can't modify a todo that doesnt exist"});
     }
     else{
@@ -52,9 +56,12 @@ app.put("/api/todos/:id",function (req,res) {
         if(fruitname && fruitname!="" && fruitname.trim()!=""){
             fruitName1.title=fruitname;
         }*/
-        var fruitStatus=req.body.fruitStatus;
-        if(fruitStatus && (fruitStatus == fruitsDB.StatusENUMS.ACTIVE || fruitStatus == fruitsDB.StatusENUMS.COMPLETE )){
-            fruitName1.status=fruitStatus;
+       console.log(req.body.fruitStatus);
+        var fruitStatus1=req.body.fruitStatus;
+        console.log("before if:"+fruitStatus1);
+        if(fruitStatus1 && (fruitStatus1==fruitsDB.statusENUMS.COMPLETE||fruitStatus1==fruitsDB.statusENUMS.ACTIVE)){
+            fruitObject.status=fruitStatus1;
+            console.log("inside if:"+fruitObject.status);
         }
         res.json(fruitsDB.todos);
     }
