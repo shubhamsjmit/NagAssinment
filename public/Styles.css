@@ -1,0 +1,12 @@
+.hidecompfruit{
+    display: inline;
+}
+.hidedelfruit{
+    display: inline;
+}
+.showcompfruit{
+    display: none;
+}
+.showdelfruit{
+    display: none;
+}

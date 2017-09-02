@@ -15,8 +15,13 @@ ADD FRUIT ELEMENT
 <input type="button" value="Add Todo" onclick="addFruitAjax()"/>
 <br>
 <br>
-Completed fruits
-<div id="CompletedFruits"></div>
+COMPLETED FRUITS&nbsp;&nbsp;&nbsp;<a href="#" id="hidecomplete" class="hidecompfruit">Hide completed elements</a>
+<a href="#" id="showcomplete" class="showcompfruit">show completed elements</a>
+<div id="CompletedFruits" class="hidecompfruit"></div>
+<br><br>
+DELETED FRUITS &nbsp;&nbsp;&nbsp;<a href="#" id="hidedelete" class="hidedelfruit">Hide deleted elements</a>
+<a href="#" id="showdelete" class="showdelfruit">show deleted elements</a>
+<div id="DeletedFruits" class="hidedelfruit"> </div>
 <script type="text/javascript" src="./script.js"></script>
 </body>
 </html>

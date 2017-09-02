@@ -7,7 +7,7 @@ var statusENUMS={
 };
 var todos={
     1:{title:"Banana" ,status:statusENUMS.ACTIVE},
-    2:{title:"Mango" ,status:statusENUMS.ACTIVE},
+    2:{title:"Mango" ,status:statusENUMS.COMPLETE},
     3:{title:"Grapes",status:statusENUMS.ACTIVE},
     4:{title:"Guava",status:statusENUMS.ACTIVE},
     5:{title:"Pineapple",status:statusENUMS.ACTIVE},

@@ -4,7 +4,7 @@ const STATUS_OK=200;
 const FRUITS_LIST_ID="fruit_list_div";
 const NEW_FRUITS_LIST_ID="fruit_input_id";
 const COMPLETE_FRUITS_DIVISION="CompletedFruits";
-
+const DELETE_FRRUITS_DIVISION="DeletedFruits";
 //execute the function at the start of the webpage
 window.onload=getFruitAJAX();
 
@@ -13,6 +13,7 @@ window.onload=getFruitAJAX();
 /*function mainLoadFun(){
 getFruitAJAX();
 }*/
+
 function getFruitAJAX() {
     var xhr=new XMLHttpRequest();
     xhr.open("GET","/api/todos",true);
@@ -27,6 +28,10 @@ function getFruitAJAX() {
                 if(COMPLETE_FRUITS_DIVISION=="CompletedFruits"){
                     addFruitElements(COMPLETE_FRUITS_DIVISION, xhr.responseText);
                 }
+                if(DELETE_FRRUITS_DIVISION=="DeletedFruits"){
+                    addFruitElements(DELETE_FRRUITS_DIVISION, xhr.responseText);
+                }
+
             }
         }
     }//end of callback
@@ -54,6 +59,12 @@ function addFruitElements(id,fruits_data_json)
                 parentDiv.appendChild(fruitElement);
                 //        console.log("last of if");
             }
+            if(fruits[key].status=="DELETE" && id=="DeletedFruits") {
+                //          console.log("inside lower if");
+                var fruitElement = createFruitElement(key, fruits[key]);
+                parentDiv.appendChild(fruitElement);
+                //        console.log("last of if");
+            }
         });
     }
 }
@@ -61,6 +72,7 @@ function addFruitElements(id,fruits_data_json)
 function createFruitElement(id,fruitObject) {
     var fruitElement=document.createElement("div");
     fruitElement.setAttribute("data-id",id);
+    fruitElement.setAttribute("data-status",fruitObject.status);
     fruitElement.setAttribute("class","todoStatus"+fruitObject.status);
 //console.log("3:point reached");
     var completeCheckbox;
@@ -69,7 +81,7 @@ function createFruitElement(id,fruitObject) {
         completeCheckbox=document.createElement("input");
         //completeButton.innerText="Mark as complete";
         completeCheckbox.setAttribute("type","checkbox");
-        completeCheckbox.setAttribute("onclick","completeFruitAJAX(+"+id+")");
+        completeCheckbox.setAttribute("onclick","completeFruitAJAX("+id+",'ACTIVE')");
         fruitElement.appendChild(completeCheckbox);
     }
     if(fruitObject.status=="COMPLETE"){
@@ -78,13 +90,13 @@ function createFruitElement(id,fruitObject) {
         //completeButton.innerText="Mark as complete";
         completeCheckbox.setAttribute("type","checkbox");
         completeCheckbox.setAttribute("checked",true);
-        completeCheckbox.setAttribute("onclick","completeFruitAJAX(+"+id+")");
+        completeCheckbox.setAttribute("onclick","completeFruitAJAX("+id+",'COMPLETE')");
         fruitElement.appendChild(completeCheckbox);
     }
     var newContent = document.createTextNode(fruitObject.title);
     fruitElement.appendChild(newContent);
 
-    if(fruitObject.status!="DELETED"){
+    if(fruitObject.status!="DELETE"){
         var completeButton=document.createElement("Button");
         completeButton.innerText = "Mark as Delete";
         completeButton.setAttribute("onclick","deleteFruitAJAX("+id+")");
@@ -113,20 +125,23 @@ function addFruitAjax(){
     }
     xhr.send(data);
 }
-function completeFruitAJAX(id){
+function completeFruitAJAX(id,fruStatus){
     //var status="ACTIVE";
    // var status1="COMPLETE";
+    console.log("complete function called")
     var xhr=new XMLHttpRequest();
     xhr.open("PUT","/api/todos/"+id,true);
     xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
     var data;
     console.log("crossed data");
-   //if(status=="ACTIVE") {
+   if(fruStatus=="ACTIVE") {
+       console.log("ACTIVE :"+xhr.responseText);
         data = "fruitStatus=COMPLETE";
-        //}
-        //if(status=="COMPLETE") {
-          //  data = "fruitStatus=ACTIVE";
-        //}
+        }
+        if(fruStatus=="COMPLETE") {
+            console.log("COMPLETE :"+xhr.responseText);
+            data = "fruitStatus=ACTIVE";
+        }
     xhr.onreadystatechange = function(){
 
         if (xhr.readyState == RESPONSE_DONE) {
@@ -142,6 +157,7 @@ function completeFruitAJAX(id){
     }
     xhr.send(data);
 }
+
 function deleteFruitAJAX(id){
     var xhr=new XMLHttpRequest();
     xhr.open("DELETE","/api/todos/"+id);
@@ -153,6 +169,9 @@ function deleteFruitAJAX(id){
             if (xhr.status == STATUS_OK) {
                 //  mainLoadFun();
                 addFruitElements(FRUITS_LIST_ID, xhr.responseText);
+                console.log(xhr.responseText);
+                addFruitElements(DELETE_FRRUITS_DIVISION, xhr.responseText);
+                addFruitElements(COMPLETE_FRUITS_DIVISION, xhr.responseText);
             }
             else {
                 console.log(xhr.responseText);
@@ -160,4 +179,58 @@ function deleteFruitAJAX(id){
         }
     }
     xhr.send(data);
+}
+var hc=document.getElementById("hidecomplete");
+var hd=document.getElementById("hidedelete");
+var sc=document.getElementById("showcomplete");
+var sd=document.getElementById("showdelete")
+hc.onclick=function () {
+    var cla=document.getElementsByClassName("hidecompfruit");
+    for(var i=0;i<cla.length;i++)
+    {
+        cla[i].style.display='none';
+    }
+
+    var scf=document.getElementsByClassName("showcompfruit");
+
+    for(var i=0;i<scf.length;i++)
+    {
+        scf[i].style.display='inline';
+    }
+}
+hd.onclick=function () {
+    var cla=document.getElementsByClassName("hidedelfruit");
+    for(var i=0;i<cla.length;i++)
+    {
+        cla[i].style.display='none';
+    }
+    var sdf=document.getElementsByClassName("showdelfruit");
+    for(var i=0;i<sdf.length;i++)
+    {
+        sdf[i].style.display='inline';
+    }
+}
+sc.onclick=function () {
+    var cla=document.getElementsByClassName("hidecompfruit");
+    for(var i=0;i<cla.length;i++)
+    {
+        cla[i].style.display='inline';
+    }
+    var scf=document.getElementsByClassName("showcompfruit");
+    for(var i=0;i<scf.length;i++)
+    {
+        scf[i].style.display='none';
+    }
+}
+sd.onclick=function () {
+    var cla=document.getElementsByClassName("hidedelfruit");
+    for(var i=0;i<cla.length;i++)
+    {
+        cla[i].style.display='inline';
+    }
+    var sdf=document.getElementsByClassName("showdelfruit");
+    for(var i=0;i<sdf.length;i++)
+    {
+        sdf[i].style.display='none';
+    }
 }
