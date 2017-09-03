@@ -10,3 +10,74 @@
 .showdelfruit{
     display: none;
 }
+#todo_head {
+    text-align: center;
+    background-color: #ffcc00;
+    height: 80px;
+    padding: 10px;
+}
+input[type="text"] {
+    font-size: 18px;
+    height: 30px;
+    border: solid 1px #dcdcdc;
+    transition: box-shadow 0.3s;
+    border: 0.5px;
+    background: #fff;
+    border-radius: 0px;
+    font-family: monospace;
+    color: #888;
+    padding: 10px;
+    padding-right: 10px;
+    border-bottom: solid 2px slategray;
+    transition: border 0.3s;
+
+}
+
+input[type="text"]:focus,
+input[type="text"].focus {
+    border-bottom: solid 2px #969696;
+}
+
+input[type="button"]{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: #008CBA;
+    color: black;
+    border: 2px solid #008CBA;
+}
+.todoStatusACTIVE{
+margin: 5px 10px 5px 15px;
+}
+.labels{
+    width: 400px;
+}
+#fruit_list_div {
+/*    padding-left: 300px;*/
+    font-size: 17px;
+    font-family: monospace;
+}
+#add_fruit{
+    padding-left: 20px;
+}
+div.todoStatusACTIVE {
+    color: blue;
+}
+
+div.todoStatusCOMPLETE {
+    color: green;
+    text-decoration: line-through;
+}
+
+div.todoStatusDELETE{
+    color: red;
+    text-decoration: line-through;
+}

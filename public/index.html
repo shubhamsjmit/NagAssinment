@@ -4,21 +4,26 @@
     <link rel="stylesheet" href="./Styles.css">
 </head>
 <body>
-<div class="header">FRUITS TO BUY</div>
+<div id="todo_head">
+    <h1> FRUITS TO BUY</h1>
+</div>
+<h2> Active FRUITS</h2>
+<div id="fruit_list_div"></div>
 <br>
-<br>
-<div id="fruit_list_div">     </div>
-<br><br>
-ADD FRUIT ELEMENT
-<input type="text" id="fruit_input_id" placeholder="Enter Todo Title Here"/>
+<hr>
+<h2>ADD FRUIT ELEMENT</h2>
+<div id="add_fruit">
+<input type="text" id="fruit_input_id" placeholder="Enter fruits Title Here"/>
 
-<input type="button" value="Add Todo" onclick="addFruitAjax()"/>
+<input type="button" value="Add FRUIT" onclick="addFruitAjax()"/>
+</div>
 <br>
 <br>
+<hr>
 COMPLETED FRUITS&nbsp;&nbsp;&nbsp;<a href="#" id="hidecomplete" class="hidecompfruit">Hide completed elements</a>
 <a href="#" id="showcomplete" class="showcompfruit">show completed elements</a>
 <div id="CompletedFruits" class="hidecompfruit"></div>
-<br><br>
+<br><br><hr>
 DELETED FRUITS &nbsp;&nbsp;&nbsp;<a href="#" id="hidedelete" class="hidedelfruit">Hide deleted elements</a>
 <a href="#" id="showdelete" class="showdelfruit">show deleted elements</a>
 <div id="DeletedFruits" class="hidedelfruit"> </div>

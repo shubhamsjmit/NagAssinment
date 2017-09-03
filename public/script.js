@@ -93,8 +93,14 @@ function createFruitElement(id,fruitObject) {
         completeCheckbox.setAttribute("onclick","completeFruitAJAX("+id+",'COMPLETE')");
         fruitElement.appendChild(completeCheckbox);
     }
+    var newContent1=document.createElement("label");
     var newContent = document.createTextNode(fruitObject.title);
-    fruitElement.appendChild(newContent);
+    newContent1.appendChild(newContent);
+    newContent1.setAttribute("class","labels");
+    fruitElement.appendChild(newContent1);
+
+
+
 
     if(fruitObject.status!="DELETE"){
         var completeButton=document.createElement("Button");
@@ -192,7 +198,7 @@ hc.onclick=function () {
     }
 
     var scf=document.getElementsByClassName("showcompfruit");
-
+ //document.getElementById("showcomplete").style.display='inline';
     for(var i=0;i<scf.length;i++)
     {
         scf[i].style.display='inline';
