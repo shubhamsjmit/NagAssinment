@@ -58,7 +58,13 @@ input[type="button"]{
 margin: 5px 10px 5px 15px;
 }
 .labels{
+    position: absolute;
+    left:50px;
     width: 400px;
+}
+.breathHorizontal{
+    position: absolute;
+    left:200px;
 }
 #fruit_list_div {
 /*    padding-left: 300px;*/
@@ -80,4 +86,10 @@ div.todoStatusCOMPLETE {
 div.todoStatusDELETE{
     color: red;
     text-decoration: line-through;
+}
+a,
+a:hover,
+a:active,
+a:focus {
+    margin-left: 700px;
 }
