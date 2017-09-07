@@ -134,22 +134,55 @@ function addFruitAjax(){
 function completeFruitAJAX(id,fruStatus){
     //var status="ACTIVE";
    // var status1="COMPLETE";
+
+    var parsedData;
+    var parsedData1;
+    var parsedData2;
     console.log("complete function called")
+    var xhr1=new XMLHttpRequest();
+    xhr1.open("GET","/api/todos",true);
+    xhr1.onreadystatechange=function () {
+        if(xhr1.readyState == RESPONSE_DONE){
+            if(xhr1.status == STATUS_OK){
+                console.log("parsed data is"+parsedData);
+                console.log("XHR1="+xhr1.response);
+                console.log("XHR1="+xhr1.responseText);
+                parsedData=JSON.parse(xhr1.responseText);
+                parsedData1=xhr1.response;
+                console.log("XHR1="+parsedData);
+                console.log(JSON.parse(xhr1.response));
+                parsedData2=xhr1.responseText;
+                console.log("here");
+            }
+        }
+    }
+    xhr1.send(data1=null);
+    //console.log("json dats is here"+JSON.parse(parsedData2));
+   //var par=JSON.parse(parsedData2);
+    //console.log(parsedData2);
+    //var parsedDa=JSON.parse(parsedData2);
+    //console.log(parsedDa[1]);
     var xhr=new XMLHttpRequest();
     xhr.open("PUT","/api/todos/"+id,true);
     xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
     var data;
+
     console.log("crossed data");
+
+console.log("id="+id);
+    //if(parsedData.){
    if(fruStatus=="ACTIVE") {
-       console.log("ACTIVE :"+xhr.responseText);
+       //console.log("ACTIVE :"+xhr.responseText);
         data = "fruitStatus=COMPLETE";
         }
         if(fruStatus=="COMPLETE") {
-            console.log("COMPLETE :"+xhr.responseText);
+        //    console.log("COMPLETE :"+xhr.responseText);
             data = "fruitStatus=ACTIVE";
         }
-    xhr.onreadystatechange = function(){
-
+        console.log()
+        //console.log("xhr.response= "+xhr.response)
+            xhr.onreadystatechange = function(){
+        //console.log("inside xhr.response= "+xhr.response)
         if (xhr.readyState == RESPONSE_DONE) {
             if (xhr.status == STATUS_OK) {
                 //  mainLoadFun();
@@ -175,7 +208,7 @@ function deleteFruitAJAX(id){
             if (xhr.status == STATUS_OK) {
                 //  mainLoadFun();
                 addFruitElements(FRUITS_LIST_ID, xhr.responseText);
-                console.log(xhr.responseText);
+               // console.log(xhr.responseText);
                 addFruitElements(DELETE_FRRUITS_DIVISION, xhr.responseText);
                 addFruitElements(COMPLETE_FRUITS_DIVISION, xhr.responseText);
             }

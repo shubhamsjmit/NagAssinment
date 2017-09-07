@@ -3,6 +3,7 @@
 }
 .hidedelfruit{
     display: inline;
+
 }
 .showcompfruit{
     display: none;
@@ -58,7 +59,7 @@ input[type="button"]{
 margin: 5px 10px 5px 15px;
 }
 .labels{
-    position: absolute;
+    position: relative;
     left:50px;
     width: 400px;
 }
@@ -91,5 +92,13 @@ a,
 a:hover,
 a:active,
 a:focus {
-    margin-left: 700px;
+    position:absolute;
+    height: auto;
+    text-align: right;
+    left:600px;
+    right: 200px;
+  /*  border: dashed;*/
+}
+#hidedelete{
+align-content: right;
 }
